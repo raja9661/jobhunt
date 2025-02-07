@@ -1,6 +1,7 @@
 import { Company } from "../models/company.model.js";
 import getDataUri from "../utils/datauri.js";
 import cloudinary from '../utils/cloud.js';
+import { Company } from './../models/company.model';
 
 
 export const registerCompany = async (req, res) => {
@@ -13,6 +14,7 @@ export const registerCompany = async (req, res) => {
       });
     }
     let company = await Company.findOne({ name: companyName });
+    console.log(company)
     if (company) {
       return res.status(401).json({
         message: "Company already exists",
@@ -27,6 +29,7 @@ export const registerCompany = async (req, res) => {
       message: "Company registered successfully.",
       company,
       success: true,
+      company
     });
   } catch (error) {
     console.log(error);
