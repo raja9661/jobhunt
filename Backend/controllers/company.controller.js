@@ -1,7 +1,6 @@
 import { Company } from "../models/company.model.js";
 import getDataUri from "../utils/datauri.js";
 import cloudinary from '../utils/cloud.js';
-import { Company } from './../models/company.model';
 
 
 export const registerCompany = async (req, res) => {
