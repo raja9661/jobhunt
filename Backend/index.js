@@ -17,8 +17,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: ["http://localhost:5173"],
-  credentials: true,
+  origin: "http://localhost:5173", // Allow requests from your frontend URL
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true // If sending cookies
 };
 
 app.use(cors(corsOptions));
@@ -39,6 +40,13 @@ app.get("/", (req, res) => {
 
 export default function handler(req, res) {
   res.status(200).json({ message: "API is working!" });
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
 }
 
 app.listen(PORT, () => {
